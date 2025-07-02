@@ -1,8 +1,8 @@
-
 import React from 'react';
 import './Dashboard.css';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { FaUserEdit, FaHistory, FaGift, FaCog } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const data = [
   { month: 'May', amount: 30000 },
@@ -21,7 +21,8 @@ const transactions = [
 ];
 
 export default function Dashboard() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
@@ -45,7 +46,7 @@ export default function Dashboard() {
       {/* Main Content Area */}
       <div className="content-wrapper">
         <div className="main-layout">
-          {/* Left/Main Dashboard Content */}
+          {/* Main Dashboard Content */}
           <div className="main-content">
             <div className="dashboard-header">
               <div>
@@ -54,38 +55,59 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Total Balance */}
-            <div className="card balance-card">
-              <h2>Total Balance</h2>
-              <p className="balance">$73,558.00</p>
-              <p className="balance-message">
-                Today is {new Date().toLocaleDateString('en-IN', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })} – spend wisely.
-              </p>
-              <div className="health-row">
-                <p className="health-score">85%</p>
-              <div className="button-group">
-                <button 
-            className="btn-small"
-          >
-            ADD TRANSACTION
-          </button>
-          <button 
-            className="btn-small"
-            // onClick={() => navigate('/details')}  // Add navigation to details page
-          >
-            VIEW TRANSACTION
-          </button>
+            {/* Top Row - Balance + Transactions */}
+            <div className="top-row">
+              <div className="card balance-card">
+                <h2>Total Balance</h2>
+                <p className="balance">$73,558.00</p>
+                <p className="balance-message">
+                  Today is {new Date().toLocaleDateString('en-IN', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })} – spend wisely.
+                </p>
+                <div className="health-row">
+                  <p className="health-score">85%</p>
+                  <div className="button-group">
+                    <button className="btn-small" onClick={() => navigate('/transaction')}>
+                        VIEW TRANSACTION
+                    </button>
+                    <button className="btn-small" onClick={() => navigate('/new-transaction')}>
+                      ADD TRANSACTION
+                    </button>
+                  </div>
                 </div>
+              </div>
+
+              <div className="card recent-transactions-card">
+                <div className="dashboard-header">
+                  <div>
+                    <h1 className="dashboard-title">Recent Transactions</h1>
+                    <p className="welcome-message">Latest Transactions</p>
+                  </div>
+                  <div className="search-container">
+                    <img src="/icons/search_3856329.png" alt="Search" className="search-icon" />
+                    <input type="text" placeholder="Search transactions..." className="search-input" />
+                  </div>
+                </div>
+
+                <ul className="transactions-list">
+                  {transactions.map((txn, i) => (
+                    <li key={i} className="transaction-item">
+                      <span>{txn.name}</span>
+                      <span className={txn.amount < 0 ? "amount-negative" : "amount-positive"}>
+                        {txn.amount < 0 ? '-' : '+'}${Math.abs(txn.amount)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            {/* Monthly Stats */}
-            <div className="stats-section">
+            {/* Bottom Row - Monthly Stats + Quick Transfer */}
+            <div className="bottom-row">
               <div className="card">
                 <h3>Monthly Income & Expenses</h3>
                 <ResponsiveContainer width="100%" height={200}>
@@ -107,56 +129,23 @@ export default function Dashboard() {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-            </div>
-          </div>
 
-          {/* Right Side Box */}
-          <div className="right-box">
-            {/* Recent Transactions */}
-            <div className="card recent-transactions-card">
-              <div className="dashboard-header">
-              <div>
-                <h1 className="dashboard-title">Recent Transactions</h1>
-                <p className="welcome-message">Latest Transactions</p>
-              </div>
-          
-                <div className="search-container">
-                  <img src="/icons/search_3856329.png" alt="Search" className="search-icon" />
-                  <input
-                    type="text"
-                    placeholder="Search transactions..."
-                    className="search-input"
-                  />
+              <div className="card quick-transfer-card">
+                <h3>Quick Transfer</h3>
+                <div className="contact-list">
+                  {['Akshit', 'Binayak', 'Jason', 'Rahul'].map((initials, i) => (
+                    <div key={i} className="contact-circle" title={`Contact ${i + 1}`}>
+                      {initials}
+                    </div>
+                  ))}
+                </div>
+                <div className="transfer-controls">
+                  <input type="text" className="transfer-input" placeholder="$ Amount" />
+                  <button className="btn-small">Send</button>
                 </div>
               </div>
-
-              <ul className="transactions-list">
-                {transactions.map((txn, i) => (
-                  <li key={i} className="transaction-item">
-                    <span>{txn.name}</span>
-                    <span className={txn.amount < 0 ? "amount-negative" : "amount-positive"}>
-                      {txn.amount < 0 ? '-' : '+'}${Math.abs(txn.amount)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
-            {/* Quick Transfer */}
-            <div className="card quick-transfer-card">
-              <h3>Quick Transfer</h3>
-              <div className="contact-list">
-                {['Akshit', 'Binayak', 'Jason', 'Rahul'].map((initials, i) => (
-                  <div key={i} className="contact-circle" title={`Contact ${i + 1}`}>
-                    {initials}
-                  </div>
-                ))}
-              </div>
-              <div className="transfer-controls">
-                <input type="text" className="transfer-input" placeholder="$ Amount" />
-                <button className="btn-small">Send</button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+/* === Dashboard Layout === */
 .dashboard-container {
   display: flex;
   min-height: 100vh;
@@ -5,8 +6,15 @@
   background: linear-gradient(to bottom right, #869ddf, #f5f7fa);
 }
 
+/* === Main Content === */
+.main-content {
+  flex-grow: 1;
+  padding: 1.5rem;
+  background: none !important;
+  box-shadow: none !important;
+}
+
 /* === Sidebar Styles === */
-/* === Sidebar Modern Look === */
 .sidebar {
   width: 80px;
   background: clear;
@@ -81,15 +89,7 @@
   border: 2px solid #4f46e5;
 }
 
-
-/* === Main Content === */
-.main-content {
-  flex-grow: 1;
-  padding: 1.5rem;
-}
-
-/* Reusing existing styles */
-
+/* === Cards and Titles === */
 .dashboard-title {
   font-size: 2rem;
   font-weight: 600;
@@ -117,7 +117,7 @@
   color: #1f2937;
 }
 
-/* Container row for health % + button */
+/* === Health Section === */
 .health-row {
   margin-top: 1rem;
   display: flex;
@@ -126,28 +126,23 @@
   gap: 0.5rem;
 }
 
-/* Inline text inside the row */
 .health-inline {
   font-size: 0.95rem;
   color: #4b5563;
 }
 
-/* Small "View Graph" button */
-.btn-small {
-  background: #0f0d0e;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.5rem;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background 0.3s;
+.health-score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2563eb;
 }
 
-.btn-small:hover {
-  background: #899adb;
+.health-info {
+  font-size: 0.9rem;
+  color: #666;
 }
 
+/* === Buttons === */
 .button-group {
   margin-top: 1rem;
   display: flex;
@@ -172,35 +167,108 @@
   cursor: pointer;
 }
 
+.btn-small {
+  background: #0f0d0e;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-small:hover {
+  background: #899adb;
+}
+
+  /* === Stats + Quick Transfer Layout (NEW) === */
+  .stats-transfer-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex;
+    margin-top: 1.5rem;
+  }
+
+/* Monthly Income & Financial Health */
 .stats-section {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.275fr 0.275fr;
   gap: 1.5rem;
+  flex: 2;
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
   margin-bottom: 1.5rem;
 }
 
-.health-score {
-  font-size: 2rem;
+/* Quick Transfer */
+.quick-transfer-card {
+  flex: 1.4;
+  min-width: 280px;
+  align-items: flex-end;
+}
+
+.quick-transfer-card h3 {
+  margin-bottom: 1rem;
+}
+
+.contact-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-circle {
+  width: 100px;
+  height: 100px;
+  background-color: #e0e7ff;
+  color: #4f46e5;
+  border-radius: 50%;
   font-weight: bold;
-  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.health-info {
-  font-size: 0.9rem;
-  color: #666;
+.contact-circle:hover {
+  background-color: #c7d2fe;
 }
 
+.transfer-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.transfer-input {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+}
+
+/* === Recent Transactions === */
 .transactions-list {
-  list-style: none;
   padding: 0;
-  margin: 0;
+  margin-top: 1rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3.1rem;
+  flex-grow: 1;
 }
 
 .transaction-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
   font-size: 0.95rem;
 }
 
@@ -212,76 +280,14 @@
   color: #16a34a;
 }
 
-.dashboard-header {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.welcome-message {
-  font-size: 1rem;
-  color: #555;
-  margin-top: 0.25rem;
-}
-/* Make the recent transactions card taller */
 .recent-transactions-card {
-  background:transparent !important;
-
+  flex: 1.5;
+  background: transparent !important;
 }
 
-/* Increase spacing between each transaction */
-.transactions-list {
-  padding: 0;
-  margin-top: 1rem;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 3.1rem; /* Adds vertical space between items */
-  flex-grow: 1;
-}
-
-/* Each transaction item with more padding */
-.transaction-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #e5e7eb;
-  font-size: 0.95rem;
-}
-
-/* Optional: Ensure transaction list takes all available space */
 .recent-transactions-card .transactions-list {
   flex-grow: 1;
-  overflow-y: auto; /* Add scroll if content exceeds height */
-}
-
-/* === Layout for Main Content + Right Box === */
-.main-layout {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-  padding: 1.5rem;
-}
-
-/* Make main-content take more space */
-.main-content {
-  flex: 3;
-}
-
-/* Right-side box styling */
-.right-box {
-  flex: 1;
-  min-width: 600px;
-}
-
-/* Card reusability remains */
-.card {
-  background: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  overflow-y: auto;
 }
 
 .transactions-header {
@@ -315,50 +321,24 @@
   width: 140px;
 }
 
-.quick-transfer-card h3 {
-  margin-bottom: 1rem;
-}
-
-.contact-list {
+/* === Layout for Top Boxes === */
+.top-row {
   display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.contact-circle {
-  width: 160px;
-  height: 160px;
-  background-color: #e0e7ff;
-  color: #4f46e5;
-  border-radius: 50%;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
+.balance-card {
+  flex: 2;
 }
 
-.contact-circle:hover {
-  background-color: #c7d2fe;
-}
-
-.transfer-controls {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.transfer-input {
+/* === Right Sidebar Placeholder (if used) === */
+.right-box {
   flex: 1;
-  padding: 0.4rem 0.6rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
-  font-size: 0.85rem;
+  min-width: 600px;
 }
-/* Transaction Buttons */
+
+/* === Transaction Buttons === */
 .transaction-buttons {
   display: flex;
   gap: 10px;
@@ -395,7 +375,22 @@
   background-color: #f0f0ff;
 }
 
-/* Ensure buttons stay on one line */
 .transaction-buttons a {
   white-space: nowrap;
+}
+.bottom-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.bottom-row .card {
+  flex: 1;
+  min-width: 0;
+}
+
+.quick-transfer-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
